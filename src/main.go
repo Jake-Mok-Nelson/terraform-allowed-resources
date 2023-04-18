@@ -12,9 +12,10 @@ type Context struct {
 }
 
 type EvalCmd struct {
-	RulesFile string `help:"Path to the file containing your rules." arg type:"existingfile" default:"rules.json" name:"rules"`
-	PlanFile  string `help:"Path to the Terraform plan file." arg type:"existingfile" default:"plan.tfplan" name:"plan"`
-	Debug     bool   `help:"Enable debug mode." default:"false"`
+	RulesFile         string `help:"Path to the file containing your rules." type:"existingfile" default:"rules.json" name:"rules" env:"TF_ALLOWED_RULES_FILE"`
+	PlanFile          string `help:"Path to the Terraform plan file." type:"existingfile" default:"plan.tfplan" name:"plan" env:"TF_ALLOWED_PLAN_FILE"`
+	DetailedExitCodes bool   `help:"Return detailed exit codes." default:"false" env:"TF_ALLOWED_DETAILED_EXIT_CODES"`
+	Debug             bool   `help:"Enable debug mode." default:"false" env:"TF_ALLOWED_DEBUG"`
 }
 
 func (r *EvalCmd) Run(ctx *Context) error {

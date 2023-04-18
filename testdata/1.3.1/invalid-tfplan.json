@@ -1,0 +1,81 @@
+{
+    "format_version": "1.1",
+    "terraform_version": "1.3.1",
+    "planned_values": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "null_resource.resource_one",
+                    "mode": "managed",
+                    "type": "null_resource",
+                    "name": "resource_one",
+                    "provider_name": "registry.terraform.io/hashicorp/null",
+                    "schema_version": 0,
+                    "values": {
+                        "triggers": {
+                            "foo": "bar"
+                        }
+                    },
+                    "sensitive_values": {
+                        "triggers": {}
+                    }
+                },
+                {
+                    "address": "null_resource.resource_two",
+                    "mode": "managed",
+                    "type": "null_resource",
+                    "name": "resource_two",
+                    "provider_name": "registry.terraform.io/hashicorp/null",
+                    "schema_version": 0,
+                    "values": {
+                        "triggers": {
+                            "foo": "bar"
+                        }
+                    },
+                    "sensitive_values": {
+                        "triggers": {}
+                    }
+                
+    "configuration": {
+        "provider_config": {
+            "null": {
+                "name": "null",
+                "full_name": "registry.terraform.io/hashicorp/null"
+            }
+        },
+        "root_module": {
+            "resources": [
+                {
+                    "address": "null_resource.resource_one",
+                    "mode": "managed",
+                    "type": "null_resource",
+                    "name": "resource_one",
+                    "provider_config_key": "null",
+                    "expressions": {
+                        "triggers": {
+                            "constant_value": {
+                                "foo": "bar"
+                            }
+                        }
+                    },
+                    "schema_version": 0
+                },
+                {
+                    "address": "null_resource.resource_two",
+                    "mode": "managed",
+                    "type": "null_resource",
+                    "name": "resource_two",
+                    "provider_config_key": "null",
+                    "expressions": {
+                        "triggers": {
+                            "constant_value": {
+                                "foo": "bar"
+                            }
+                        }
+                    },
+                    "schema_version": 0
+                }
+            ]
+        }
+    }
+}
