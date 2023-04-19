@@ -37,3 +37,72 @@ func TestGetNewResources(t *testing.T) {
 	// Assert that the new resource is named test-instance
 	assert.Equal(t, newResources[0].Name, "resource_one")
 }
+
+// Test IsAllowed() with a resource that is allowed to be created
+func TestIsAllowed(t *testing.T) {
+	// Create a new NewResource struct
+	newResource := NewResource{
+		Type: "null_resource",
+		Name: "resource_one",
+	}
+
+	allowList := []string{"null_resource"}
+
+	// Assert that the new resource is allowed to be created
+	assert.True(t, newResource.IsAllowed(allowList))
+}
+
+// Test IsAllowed() with a resource that is not allowed to be created
+func TestIsAllowed_NotAllowed(t *testing.T) {
+	// Create a new NewResource struct
+	newResource := NewResource{
+		Type: "aws_instance",
+		Name: "test-instance",
+	}
+
+	allowList := []string{"null_resource"}
+
+	// Assert that the new resource is not allowed to be created
+	assert.False(t, newResource.IsAllowed(allowList))
+}
+
+// Test IsAllowed() where the allow list is empty
+func TestIsAllowed_EmptyAllowList(t *testing.T) {
+	// Create a new NewResource struct
+	newResource := NewResource{
+		Type: "aws_instance",
+		Name: "test-instance",
+	}
+
+	allowList := []string{}
+
+	// Assert that the new resource is not allowed to be created
+	assert.False(t, newResource.IsAllowed(allowList))
+}
+
+// Test IsAllowed() where the allow list is nil
+func TestIsAllowed_NilAllowList(t *testing.T) {
+	// Create a new NewResource struct
+	newResource := NewResource{
+		Type: "aws_instance",
+		Name: "test-instance",
+	}
+
+	// Assert that the new resource is not allowed to be created
+	assert.False(t, newResource.IsAllowed(nil))
+}
+
+// Test IsAllowed() where the allow list contains a wildcard
+// don't allow wildcared rules to match multiple resources (yet)
+func TestIsAllowed_Wildcard(t *testing.T) {
+	// Create a new NewResource struct
+	newResource := NewResource{
+		Type: "aws_instance",
+		Name: "test-instance",
+	}
+
+	allowList := []string{"*"}
+
+	// Assert that the new resource is allowed to be created
+	assert.False(t, newResource.IsAllowed(allowList))
+}
